@@ -15,13 +15,6 @@ NUMBER_SUBJECTS = 8
 NUMBER_GRADES = 20
 LEVEL_GRADES = 5
 
-# NUMBER_STUDENTS = 5
-# NUMBER_FACULTIES = 5
-# NUMBER_PROFESSORS = 2
-# NUMBER_SUBJECTS = 2
-# NUMBER_GRADES = 4
-# LEVEL_GRADES = 5
-
 
 if __name__ == "__main__":
     for _ in range(NUMBER_FACULTIES):
@@ -29,10 +22,12 @@ if __name__ == "__main__":
         session.add(faculty)
 
     for _ in range(NUMBER_STUDENTS):
+        last_name = fake_data.last_name()
+        first_name = fake_data.first_name()
         student = Student(
-            last_name=fake_data.last_name(),
-            first_name=fake_data.first_name(),
-            e_mail=fake_data.unique.ascii_email(),
+            last_name=last_name,
+            first_name=first_name,
+            e_mail=f"{first_name.lower()}.{last_name.lower()}@{fake_data.domain_name()}",
             faculty_id=randint(1, NUMBER_FACULTIES),
         )
         session.add(student)

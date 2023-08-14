@@ -4,6 +4,7 @@ from alembic import context
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 
+from connect_db import url
 from models import Base
 
 # this is the Alembic Config object, which provides
@@ -23,6 +24,7 @@ target_metadata = Base.metadata
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
+config.set_main_option("sqlalchemy.url", url)
 # my_important_option = config.get_main_option("my_important_option")
 # ... etc.
 

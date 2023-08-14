@@ -1,6 +1,4 @@
-from datetime import datetime
-
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, func
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql.schema import ForeignKey
@@ -14,7 +12,7 @@ class Faculty(Base):
 
     id = Column(Integer, primary_key=True)
     name = Column(String(56))
-    created_at = Column(DateTime, default=datetime.now())
+    created_at = Column(DateTime, default=func.now())
     students = relationship("Student", backref="faculty")
 
 
@@ -26,7 +24,7 @@ class Student(Base):
     first_name = Column(String(56))
     e_mail = Column(String(128), nullable=False, unique=True)
     faculty_id = Column(Integer, ForeignKey("faculties.id"))
-    created_at = Column(DateTime, default=datetime.now())
+    created_at = Column(DateTime, default=func.now())
 
 
 class Professor(Base):
@@ -35,7 +33,7 @@ class Professor(Base):
     id = Column(Integer, primary_key=True)
     last_name = Column(String(56))
     first_name = Column(String(56))
-    created_at = Column(DateTime, default=datetime.now())
+    created_at = Column(DateTime, default=func.now())
     subjects = relationship("Subject", backref="professor")
 
 
@@ -45,7 +43,7 @@ class Subject(Base):
     id = Column(Integer, primary_key=True)
     title = Column(String(56))
     professor_id = Column(Integer, ForeignKey("professors.id"), nullable=False)
-    created_at = Column(DateTime, default=datetime.now())
+    created_at = Column(DateTime, default=func.now())
 
 
 class Grade(Base):
