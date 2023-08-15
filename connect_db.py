@@ -4,8 +4,16 @@ import pathlib
 from sqlalchemy.engine import create_engine
 from sqlalchemy.orm import sessionmaker
 
+default_values = {
+    "USER": "postgres",
+    "PASSWORD": "password",
+    "DB_NAME": "university",
+    "HOST": "localhost",
+    "PORT": 5432,
+}
+
 config_path = pathlib.Path(__file__).parent.joinpath("config.ini")
-config = configparser.ConfigParser()
+config = configparser.ConfigParser(default_values)
 config.read(config_path)
 
 USER = config.get("DB_DEV", "USER")
